@@ -1,0 +1,5 @@
+{
+  "name": "noteit",
+  "description": "A cute app to leave notes for yourself before school and read them when you get home.",
+  "requestFramePermissions": []
+}
