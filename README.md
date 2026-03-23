@@ -1,4 +1,4 @@
-# Dear Me - Journal App
+# Noteit
 
 A beautiful, customizable journaling app with daily word goals, custom themes, and gamification features.
 

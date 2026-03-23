@@ -91,8 +91,8 @@ const processCustomBackground = (file: File): Promise<{ image: string, colors: R
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 1920;
-        const MAX_HEIGHT = 1080;
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 600;
         let width = img.width;
         let height = img.height;
 
@@ -113,7 +113,7 @@ const processCustomBackground = (file: File): Promise<{ image: string, colors: R
         if (!ctx) return reject('No canvas context');
         ctx.drawImage(img, 0, 0, width, height);
         
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
 
         const sampleCanvas = document.createElement('canvas');
         sampleCanvas.width = 64;
@@ -122,6 +122,13 @@ const processCustomBackground = (file: File): Promise<{ image: string, colors: R
         if (!sampleCtx) return reject('No sample context');
         sampleCtx.drawImage(img, 0, 0, 64, 64);
         const imageData = sampleCtx.getImageData(0, 0, 64, 64).data;
+        
+        // Cleanup to save RAM
+        canvas.width = 0;
+        canvas.height = 0;
+        sampleCanvas.width = 0;
+        sampleCanvas.height = 0;
+        img.src = '';
         
         let r = 0, g = 0, b = 0;
         let count = 0;
